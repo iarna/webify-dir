@@ -1,0 +1,8 @@
+#!/bin/bash
+TO_PUBLISH=${1:-$(pwd)}
+PWD=$(perl -MCwd -lE "say Cwd::realpath(q{$TO_PUBLISH})")/
+PATH_HASH=$(echo $PWD | openssl md5 | cut -b 1-8)
+PUBLISH_AS=${2:-$PATH_HASH}
+echo "$PUBLISH_AS $PWD" | sudo tee -a /etc/apache2/pubsitemap.txt > /dev/null
+echo "$PWD is now available as:"
+echo "http://primera.mikomi.org/$PUBLISH_AS/"

@@ -1,0 +1,8 @@
+NameVirtualHost primera.mikomi.org:80
+<VirtualHost primera.mikomi.org:80>
+    ServerName primera.mikomi.org
+    RewriteEngine On
+    RewriteMap PubSiteMap /etc/apache2/pubsitemap.txt
+    RewriteCond ${PubSiteMap:$1} -d
+    RewriteRule ^/([a-z0-9]+)/(.*) ${PubSiteMap:$1}$2
+</VirtualHost>
